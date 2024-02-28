@@ -1,0 +1,98 @@
+trainset: gta5
+valset: cityscapes
+
+model:
+    arch: deeplab101
+    pretrained: True
+    bn: sync_bn #bn, sync_abn, abn, gn
+    # bone_version: res50
+    # aux_loss: True
+    init:
+        init_type: kaiming
+        init_gain: 0.02
+    basenet:
+        name: psp_base
+        version: resnet101
+        aux_loss: True
+    default_gpu: 0
+
+data:
+    source:
+        name: gta5
+        rootpath: data/GTA5
+        split: all
+        img_rows: 1052
+        img_cols: 1914
+        batch_size: 1
+        is_transform: True
+        img_norm: True
+        shuffle: True
+        n_class: 19
+    target:
+        name: cityscapes
+        rootpath: data/Cityscapes
+        split: train
+        img_rows: 1024
+        img_cols: 2048
+        batch_size: 1
+        is_transform: True
+        img_norm: True
+        shuffle: True
+        n_class: 19
+    source_valid:
+        name: gta5
+        rootpath: data/GTA5
+        split: val
+        img_rows: 720
+        img_cols: 1280
+        batch_size: 1
+        n_class: 19
+        shuffle: True
+    target_valid:
+        name: cityscapes
+        rootpath: data/Cityscapes
+        split: val
+        img_rows: 1024
+        img_cols: 2048
+        batch_size: 1
+        shuffle: True
+        n_class: 19
+
+    num_workers: 6
+    n_class: 19
+training:
+    epoches: 84
+    bnaffine: True
+    train_iters: 20000
+    freeze_bn: False
+    val_interval: 1000
+    print_interval: 20
+    n_workers: 8
+    valid_classes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+    augmentations_W:
+    augmentations_S:
+    optimizer:
+        # name: 'Adam'
+        name: 'SGD'
+        lr: 0.00025
+        weight_decay: 2.0e-4
+        momentum: 0.9
+        # betas: [0.9, 0.99]
+    loss:
+        name: 'cross_entropy'
+        size_average: True
+    lr_schedule:
+        # name: 'multi_step'
+        # milestones: [20000, 110000]
+        # gamma: 0.1
+        name: 'poly_lr'
+        gamma: 0.9
+        max_iter: 31250
+        # name: 'constant_lr'
+    resume: pretrain_model/from_gta5_to_cityscapes_warm_up_model.pkl
+    Pred_resume:
+    optimizer_resume: False #True
+    gan_resume: 
+    resume_flag: False
+test:
+    path: pretrain_model/BPL_gta_to_city.pkl
