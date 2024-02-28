@@ -21,7 +21,7 @@ python train_bpl.py
 python train_pst.py
 ```
 
-- Following the same knowledge distillation technique by [ProDA](https://github.com/microsoft/ProDA), we have the [final model](https://drive.google.com/file/d/1xbIg5JLG8iBut0NIOOR_CyBEtCUWjsue/view?usp=drive_link).
+- Following the same knowledge distillation technique by [ProDA](https://github.com/microsoft/ProDA), we have the [final model](https://drive.google.com/file/d/1HtaZLhx_5WKHN9h8z7f2GnRZQEdym3hp/view?usp=drive_link).
 
 - Inference (*you can modify the trained model in 'configs/test_from_gta_to_city.yml'*)
 ```
