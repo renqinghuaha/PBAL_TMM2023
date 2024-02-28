@@ -7,9 +7,26 @@ Cross-domain semantic segmentation, which aims to address the distribution shift
 
 Usage
 ---
--Prepare Datasets: [GTA5](https://download.visinf.tu-darmstadt.de/data/from_games/) dataset as the source domain, and the [Cityscapes](https://www.cityscapes-dataset.com/) dataset as the target domain.
--Put the [warm_up model](https://drive.google.com/file/d/1xvSJnNFDCOqb73kGZbP1MB97Tvl9nUbS/view?usp=drive_link) into the 'pretrain_model' folder.
-Run the command
+- Prepare Datasets: [GTA5](https://download.visinf.tu-darmstadt.de/data/from_games/) dataset as the source domain, and the [Cityscapes](https://www.cityscapes-dataset.com/) dataset as the target domain.
+
+- Put the [warm_up model](https://drive.google.com/file/d/1xvSJnNFDCOqb73kGZbP1MB97Tvl9nUbS/view?usp=drive_link) into the 'pretrain_model' folder.
+
+- Train stage1 ([our trained BPL model](https://drive.google.com/file/d/13pEivIotb7zHtaTZbjTbCn0niJ7tYBZu/view?usp=drive_link))
+```
+python train_bpl.py
+```
+
+- Train stage2 (*you should generate pseudo labels in advance using the 'stage1' trained model*, [our trained PST model](https://drive.google.com/file/d/1xbIg5JLG8iBut0NIOOR_CyBEtCUWjsue/view?usp=drive_link))
+```
+python train_pst.py
+```
+
+- Following the same knowledge distillation technique by [ProDA](https://github.com/microsoft/ProDA), we have the [final model](https://drive.google.com/file/d/1xbIg5JLG8iBut0NIOOR_CyBEtCUWjsue/view?usp=drive_link).
+
+- Inference (*you can modify the trained model in 'configs/test_from_gta_to_city.yml'*)
+```
+python test.py
+```
 
 The pretrained models
 ---
