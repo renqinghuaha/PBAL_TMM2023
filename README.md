@@ -1,5 +1,5 @@
-# PBAL
-Prototypical Bidirectional Adaptation and Learning for Cross-Domain Semantic Segmentation (IEEE Transactions on Multimedia 2023, [Paper](https://ieeexplore.ieee.org/document/10102322/))
+# Prototypical Bidirectional Adaptation and Learning for Cross-Domain Semantic Segmentation (PBAL)
+IEEE Transactions on Multimedia 2023, [Paper](https://ieeexplore.ieee.org/document/10102322/)
 
 Abstract
 ---
